@@ -15,6 +15,7 @@ RUN \
   apt-get update && \
   apt-get install -y software-properties-common && \
   apt-add-repository ppa:ansible/ansible && \
+  apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 &&\
   apt-get update && \
   apt-get install -y --force-yes ansible
 
