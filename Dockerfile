@@ -19,6 +19,7 @@ RUN \
   #apt-get update && \
   #apt-get install -y --force-yes ansible
 
+ADD app /app
 WORKDIR /app
 
 RUN pip install --no-cache-dir -r requirements.txt
