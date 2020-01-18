@@ -21,7 +21,7 @@ steps:
   inputs:
     containerRegistry: |
       $(dockerHub)
-    repository: $(dockerRepo)/$(imageName)
+    repository: $(imageName)
     command: push
     tags: |
       0.1
