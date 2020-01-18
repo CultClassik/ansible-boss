@@ -8,9 +8,9 @@ services:
   - docker
 
 script:
-  - DOCKER_REPO=$DOCKER_USER
-  - TAG="0.2"
+  - TAG="0.1"
   - CONT_NAME="ansible-control"
+  - DOCKER_REPO=$DOCKER_USER
   - docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
   - docker build --build-arg -t $DOCKER_REPO/$CONT_NAME:latest .
   - docker images

@@ -1,0 +1,27 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'Ubuntu-18.04'
+
+variables:
+  imageName: 'ansible-boss'
+  dockerRepo: 'cultclassik'
+
+steps:
+- task: Docker@2
+  displayName: Build image
+  inputs:
+    repository: $(imageName)
+    command: build
+    Dockerfile: Dockerfile
+- task: Docker@2
+  displayName: Push image
+  inputs:
+    containerRegistry: |
+      $(dockerHub)
+    repository: $(dockerRepo)/$(imageName)
+    command: push
+    tags: |
+      0.1
+      latest
