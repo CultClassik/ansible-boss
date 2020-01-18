@@ -1,4 +1,4 @@
-FROM pypy:3.6-slim-stretch
+FROM pypy:2.7-slim-jessie
 
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
