@@ -24,7 +24,7 @@ steps:
   displayName: Push image
   inputs:
     containerRegistry: |
-      $(dockerHub)
+      'Docker Hub CultClassik' # $(dockerHub)
     repository: $(imageName)
     command: push
     tags: |
