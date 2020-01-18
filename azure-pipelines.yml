@@ -7,6 +7,7 @@ pool:
 variables:
   imageName: 'ansible-boss'
   dockerRepo: 'cultclassik'
+  dockerHub: 'Docker Hub CultClassik'
 
 steps:
 - task: Docker@2
