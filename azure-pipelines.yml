@@ -14,7 +14,7 @@ steps:
   inputs:
     repository: $(imageName)
     command: build
-    Dockerfile: Dockerfile
+    Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
 - task: Docker@2
   displayName: Push image
   inputs:
