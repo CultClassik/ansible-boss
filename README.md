@@ -13,7 +13,7 @@ Requires a working installation of Docker CE or EE.
 
 A repository containing your Ansible code.
 
-Target systems must have the SSH_USER created and have the public key that corresponds to the mapped private key file.
+Target systems must have the SSH_USER created and have the public key that corresponds to the mapped private key file.  This user probably needs sudo rights.
 
 ## Installation
 
