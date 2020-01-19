@@ -3,7 +3,6 @@ FROM pypy:3-stretch
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
 ENV SSH_USER="ansible"
-ENV SSH_HOST="naster.diehlabs.lan"
 ENV GIT_URL="https://github.com/CultClassik/ansible-control.git"
 ENV GIT_DIR="/ansible"
 ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --private-key /key.rsa"
