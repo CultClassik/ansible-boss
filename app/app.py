@@ -37,7 +37,7 @@ class ansibleResource:
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
             # print contents of ansible repo dir
-            print(os.listdir(self))
+            print(os.listdir(self.git_dir))
             # Execute the ansible run command
             os.system(self.command)
         except Exception as ex:
