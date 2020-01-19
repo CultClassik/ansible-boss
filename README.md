@@ -1,6 +1,8 @@
 # py-ansible-control
-[![Build Status](https://dev.azure.com/cultclassik/Diehlabs/_apis/build/status/ansible-boss?branchName=master)](https://dev.azure.com/cultclassik/Diehlabs/_build/latest?definitionId=3&branchName=master)
-[Image on Docker Hub](https://hub.docker.com/r/cultclassik/ansible-control/)
+
+* [![Build Status](https://dev.azure.com/cultclassik/Diehlabs/_apis/build/status/ansible-boss?branchName=master)](https://dev.azure.com/cultclassik/Diehlabs/_build/latest?definitionId=3&branchName=master)
+
+* [Image on Docker Hub](https://hub.docker.com/r/cultclassik/ansible-control/)
 
 Python source to build cultclassik/ansible-control container.
 
