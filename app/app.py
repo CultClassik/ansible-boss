@@ -3,7 +3,7 @@ import falcon, json, git, os, shutil
 
 class ansibleResource:
 
-    def __init__(self, user, host, url, dir, cmd):
+    def __init__(self, user, url, dir, cmd):
         self.ssh_user = user
         self.git_url = url
         self.git_dir = dir
@@ -36,6 +36,8 @@ class ansibleResource:
             os.makedirs(self.git_dir)
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
+            # print contents of ansible repo dir
+            print(os.listdir(self))
             # Execute the ansible run command
             os.system(self.command)
         except Exception as ex:
@@ -44,7 +46,6 @@ class ansibleResource:
 api = falcon.API()
 api.add_route('/run', ansibleResource(
     os.environ["SSH_USER"],
-    os.environ["SSH_HOST"],
     os.environ["GIT_URL"],
     os.environ["GIT_DIR"],
     os.environ["ANSIBLE_CMD"]
