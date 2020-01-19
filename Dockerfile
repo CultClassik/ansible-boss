@@ -8,7 +8,7 @@ ENV GIT_URL="https://cultclassik@dev.azure.com/cultclassik/Diehlabs/_git/ansible
 ENV GIT_DIR="/ansible"
 ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --private-key /key.rsa"
 ENV ANSIBLE_HOST_KEY_CHECKING=False
-ENV ANSIBLE_VERSION="2.4.6"
+ENV ANSIBLE_VERSION="2.5.1"
 
 USER root
 
