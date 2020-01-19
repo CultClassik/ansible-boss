@@ -8,7 +8,7 @@ ENV GIT_URL="https://github.com/CultClassik/ansible-control.git"
 ENV GIT_DIR="/ansible"
 ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --private-key /key.rsa"
 ENV ANSIBLE_HOST_KEY_CHECKING=False
-ENV ANSIBLE_VERSION="2.5.1"
+ENV ANSIBLE_VERSION="2.9.3-1ppa~trusty"
 
 USER root
 
