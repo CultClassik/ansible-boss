@@ -5,7 +5,6 @@ class ansibleResource:
 
     def __init__(self, user, host, url, dir, cmd):
         self.ssh_user = user
-        #self.ssh_host = host
         self.git_url = url
         self.git_dir = dir
         self.command = cmd
@@ -37,8 +36,7 @@ class ansibleResource:
             os.makesdirs(self.git_dir)
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
-            # Use ssh to execute ansible run on remote host
-            #os.system('ssh -o StrictHostKeyChecking=no -i /key.rsa {}@{} "{}"',format(self.ssh_user, self.ssh_host, self.command))
+            # Execute the ansible run command
             os.system(self.command)
         except Exception as ex:
             raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
