@@ -5,7 +5,7 @@ class ansibleResource:
 
     def __init__(self, user, host, url, dir, cmd):
         self.ssh_user = user
-        self.ssh_host = host
+        #self.ssh_host = host
         self.git_url = url
         self.git_dir = dir
         self.command = cmd
@@ -30,7 +30,8 @@ class ansibleResource:
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
             # Use ssh to execute ansible run on remote host
-            os.system('ssh -o StrictHostKeyChecking=no -i /key.rsa {}@{} "{}"',format(self.ssh_user, self.ssh_host, self.command))
+            #os.system('ssh -o StrictHostKeyChecking=no -i /key.rsa {}@{} "{}"',format(self.ssh_user, self.ssh_host, self.command))
+            os.system(self.command)
             # Delete the git repo folder
             shutil.rmtree(self.git_dir)
 
