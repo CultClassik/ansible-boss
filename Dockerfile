@@ -23,7 +23,7 @@ WORKDIR /app
 RUN pip install --no-cache-dir -r requirements.txt &&\
     mkdir /ansible
 
-# The private key shoudl be mounted which will be used to connect to systems using Ansible
+# The private key should be mounted which will be used to connect to systems using Ansible
 VOLUME /key.rsa
 
 EXPOSE 8000
