@@ -8,6 +8,7 @@ ENV GIT_URL="https://cultclassik@dev.azure.com/cultclassik/Diehlabs/_git/ansible
 ENV GIT_DIR="/ansible"
 ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --private-key /key.rsa"
 ENV ANSIBLE_HOST_KEY_CHECKING=False
+ENV ANSIBLE_VERSION="2.4.6"
 
 USER root
 
@@ -15,7 +16,7 @@ RUN \
   echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list &&\
   apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367 &&\
   apt update &&\
-  apt install ansible -y
+  apt install ansible=${ANSIBLE_VERSION} -y
 
 ADD app /app
 WORKDIR /app
