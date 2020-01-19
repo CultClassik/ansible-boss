@@ -20,7 +20,8 @@ RUN \
 ADD app /app
 WORKDIR /app
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt &&\
+    mkdir /ansible
 
 # The private key shoudl be mounted which will be used to connect to systems using Ansible
 VOLUME /key.rsa

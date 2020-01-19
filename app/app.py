@@ -27,13 +27,13 @@ class ansibleResource:
             result = json.loads(raw_json, encoding='utf-8')
             print(json.dumps(result))
             resp.body = json.dumps(result)
+            # Delete the git repo folder
+            shutil.rmtree(self.git_dir)
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
             # Use ssh to execute ansible run on remote host
             #os.system('ssh -o StrictHostKeyChecking=no -i /key.rsa {}@{} "{}"',format(self.ssh_user, self.ssh_host, self.command))
             os.system(self.command)
-            # Delete the git repo folder
-            shutil.rmtree(self.git_dir)
 
         except ValueError:
             raise falcon.HTTPError(falcon.HTTP_400,'Invalid JSON','Could not decode the request body. The ''JSON was incorrect.')
