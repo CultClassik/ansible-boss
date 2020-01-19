@@ -21,14 +21,14 @@ class ansibleResource:
         try:
             raw_json = req.stream.read().decode('utf-8')
         except Exception as ex:
-            raise falcon.HTTPError(falcon.HTTP_400,'Error',ex.message)
+            raise falcon.HTTPError(falcon.HTTP_400, 'Error', 'This service only accepts POST requests: {}'.format(ex.message))
 
         try:
             result = json.loads(raw_json, encoding='utf-8')
             print(json.dumps(result))
             resp.body = json.dumps(result)
         except ValueError:
-            raise falcon.HTTPError(falcon.HTTP_400,'Invalid JSON','Could not decode the request body. The ''JSON was incorrect.')
+            raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
 
         try:
             # Delete the git repo folder
