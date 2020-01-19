@@ -1,0 +1,21 @@
+docker run --rm \
+  --name ansible-boss \
+  -e "SSH_USER=ansible" \
+  -e "GIT_URL=https://github.com/CultClassik/ansible-control.git" \
+  -e "ANSIBLE_CMD=ansible-playbook /ansible/main.yml" \
+  --label "traefik.enable=true" \
+  --label "traefik.frontend.rule=Host:ansible.diehlabs.lan" \
+  --label "traefik.port=8000" \
+  --network="diehlabs_app" \
+  -v /mnt/int_4tb/data/keys/cultclassik_rsa.key:/key.rsa \
+  cultclassik/ansible-boss:latest
+
+
+docker run --rm \
+  --name ansible-boss \
+  -e "SSH_USER=ansible" \
+  -e "GIT_URL=https://github.com/CultClassik/ansible-control.git" \
+  -e "ANSIBLE_CMD=ansible-playbook /ansible/main.yml" \
+  --net="host" \
+  -v /mnt/int_4tb/data/keys/cultclassik_rsa.key:/key.rsa \
+  cultclassik/ansible-boss:latest
