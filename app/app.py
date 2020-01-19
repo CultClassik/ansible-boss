@@ -33,6 +33,8 @@ class ansibleResource:
         try:
             # Delete the git repo folder
             shutil.rmtree(self.git_dir)
+            # Create the git dir before cloning repo to it
+            os.makesdirs(self.git_dir)
             # Clone the git repo
             git.Git(self.git_dir).clone(self.git_url)
             # Use ssh to execute ansible run on remote host
