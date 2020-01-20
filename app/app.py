@@ -38,13 +38,17 @@ class ansibleResource:
       os.makedirs(self.git_dir)
 
       # Clone the git repo
-      git.Git(self.git_dir).clone(self.git_url)
+      #git.Git(self.git_dir).clone(self.git_url)
+      clone_result = os.system('git clone {} {}'.format(self.git_url, self.git_dir))
 
       # print contents of ansible repo dir
       print(os.listdir(self.git_dir))
 
       # Execute the ansible run command
       os.system(self.command)
+
+      # add a falcon response here?
+
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
 
