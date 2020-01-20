@@ -40,6 +40,7 @@ class ansibleResource:
       # Clone the git repo
       #git.Git(self.git_dir).clone(self.git_url)
       clone_result = os.system('git clone {} {}'.format(self.git_url, self.git_dir))
+      print('Clone result: {}'.format(clone_result))
 
       # print contents of ansible repo dir
       print(os.listdir(self.git_dir))
