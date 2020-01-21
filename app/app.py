@@ -42,7 +42,7 @@ class ansibleResource:
       print('Created Ansible run task: {}'.format(run_task))
       resp.status = falcon.HTTP_202
       resp.body = 'Ansible run initiated as asyncio task'
-      print('Awaiting task completion: {}'.format(await run_task))
+
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
 
