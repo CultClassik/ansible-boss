@@ -36,7 +36,7 @@ class ansibleResource:
       raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
 
     try:
-      asyncio.create_task(
+      asyncio.run(
         self.run_ansible(self.git_url, self.git_dir, ansible_cmd))
 
       resp.status = falcon.HTTP_202
