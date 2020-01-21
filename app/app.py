@@ -24,6 +24,10 @@ class ansibleResource:
 
     try:
       result = json.loads(raw_json, encoding='utf-8')
+      ansible_cmd = self.command
+      if result.check:
+        print('Webhook asked for check mode, changes will not be applied to inventory.')
+        ansible_cmd.append(' --check')
       print(json.dumps(result))
       resp.body = json.dumps(result)
     except ValueError:
