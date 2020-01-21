@@ -1,5 +1,5 @@
 #app.py
-import falcon, json, os, shutil
+import falcon, json, os, shutil, asyncio
 
 class ansibleResource:
 
@@ -27,34 +27,39 @@ class ansibleResource:
       print('HTTP request body: {}'.format(json.dumps(result)))
       ansible_cmd = self.command
       if "check" in result:
-        if result.check == true:
+        if result.check:
           print('Webhook asked for check mode, changes will not be applied to inventory.')
           ansible_cmd += ' --check'
 
-      resp.body = json.dumps(result)
+      #resp.body = json.dumps(result)
     except ValueError:
       raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
 
     try:
-      # Delete the git repo folder if it exists
-      if os.path.exists(self.git_dir):
-          shutil.rmtree(self.git_dir)
+      asyncio.create_task(
+        self.run_ansible(self.git_url, self.git_dir, ansible_cmd))
 
-      # Clone the git repo
-      #git.Git(self.git_dir).clone(self.git_url)
-      clone_result = os.system('git clone {} {}'.format(self.git_url, self.git_dir))
-      print('Clone result: {}'.format(clone_result))
-
-      # print contents of ansible repo dir
-      print(os.listdir(self.git_dir))
-
-      # Execute the ansible run command
-      os.system(self.command)
-
-      # add a falcon response here?
+      resp.status = falcon.HTTP_202
+      resp.body = {
+        'message': 'Ansible run initiated.'
+      }
 
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
+
+    async def run_ansible(repo_url, clone_to_dir, ansible_cmd):
+      try:
+        # Delete the git repo folder if it exists
+        if os.path.exists(clone_to_dir):
+            shutil.rmtree(clone_to_dir)
+
+        # Clone the git repo
+        clone_result = os.system('git clone {} {}'.format(repo_url, clone_to_dir))
+        print('Clone result: {}'.format(clone_result))
+
+        # Execute the ansible run command
+        os.system(ansible_cmd)
+
 
 api = falcon.API()
 api.add_route('/run', ansibleResource(
