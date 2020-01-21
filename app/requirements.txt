@@ -1,8 +1,11 @@
+# api packages
 cffi==1.11.2
 falcon==1.4.1
 gunicorn==19.7.1
 python-mimeparse==1.6.0
 readline==6.2.4.1
 six==1.11.0
-ansible==2.9.4
 #gitpython==3.0.5
+# ansible specific packages
+python-apt==1.9.4
+ansible==2.9.4
