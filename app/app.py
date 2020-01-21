@@ -34,9 +34,6 @@ class ansibleResource:
       if os.path.exists(self.git_dir):
           shutil.rmtree(self.git_dir)
 
-      # Create the git dir before cloning repo to it
-      os.makedirs(self.git_dir)
-
       # Clone the git repo
       #git.Git(self.git_dir).clone(self.git_url)
       clone_result = os.system('git clone {} {}'.format(self.git_url, self.git_dir))
