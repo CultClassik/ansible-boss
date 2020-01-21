@@ -36,12 +36,21 @@ class ansibleResource:
       raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
 
     try:
-      run_task = asyncio.ensure_future(
-        run_ansible(self.git_url, self.git_dir, ansible_cmd))
-
-      print('Created Ansible run task: {}'.format(run_task))
+      #run_task = asyncio.ensure_future(
+      #  run_ansible(self.git_url, self.git_dir, ansible_cmd))
+      #print('Created Ansible run task: {}'.format(run_task))
+      #resp.body = 'Ansible run initiated as asyncio task'
       resp.status = falcon.HTTP_202
-      resp.body = 'Ansible run initiated as asyncio task'
+
+      if os.path.exists(self.git_dir):
+          shutil.rmtree(self.git_dir)
+
+      # Clone the git repo
+      clone_result = os.system('git clone {} {}'.format(self.git_url, self.git_dir))
+      print('Clone result: {}'.format(clone_result))
+
+      # Execute the ansible run command
+      os.system(ansible_cmd)
 
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
