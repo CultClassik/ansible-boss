@@ -24,7 +24,7 @@ class ansibleResource:
 
     try:
       result = json.loads(raw_json, encoding='utf-8')
-      print('HTTP request body: {}',.format(json.dumps(result)))
+      print('HTTP request body: {}'.format(json.dumps(result)))
       ansible_cmd = self.command
       if "check" in result:
         print('Webhook asked for check mode, changes will not be applied to inventory.')
