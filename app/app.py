@@ -36,8 +36,8 @@ class ansibleResource:
       raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
 
     try:
-      asyncio.run(
-        self.run_ansible(self, ansible_cmd))
+      asyncio.ensure_future(
+        run_ansible(self.git_url, self.git_dir, ansible_cmd))
 
       resp.status = falcon.HTTP_202
       resp.body = {
@@ -47,23 +47,21 @@ class ansibleResource:
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
 
-  async def run_ansible(self, ansible_cmd):
-    repo_url = self.git_url
-    clone_to_dir = self.git_dir
-    
-    try:
-      # Delete the git repo folder if it exists
-      if os.path.exists(clone_to_dir):
-          shutil.rmtree(clone_to_dir)
+async def run_ansible(repo_url, clone_to_dir, ansible_cmd):
 
-      # Clone the git repo
-      clone_result = os.system('git clone {} {}'.format(repo_url, clone_to_dir))
-      print('Clone result: {}'.format(clone_result))
+  try:
+    # Delete the git repo folder if it exists
+    if os.path.exists(clone_to_dir):
+        shutil.rmtree(clone_to_dir)
 
-      # Execute the ansible run command
-      os.system(ansible_cmd)
-    except Exception as ex:
-      print('Application error: {}'.format(ex))
+    # Clone the git repo
+    clone_result = os.system('git clone {} {}'.format(repo_url, clone_to_dir))
+    print('Clone result: {}'.format(clone_result))
+
+    # Execute the ansible run command
+    os.system(ansible_cmd)
+  except Exception as ex:
+    print('Application error: {}'.format(ex))
 
 api = falcon.API()
 api.add_route('/run', ansibleResource(
