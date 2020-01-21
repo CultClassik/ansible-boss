@@ -27,8 +27,9 @@ class ansibleResource:
       print('HTTP request body: {}'.format(json.dumps(result)))
       ansible_cmd = self.command
       if "check" in result:
-        print('Webhook asked for check mode, changes will not be applied to inventory.')
-        ansible_cmd.append(' --check')
+        if result.check == true:
+          print('Webhook asked for check mode, changes will not be applied to inventory.')
+          ansible_cmd += ' --check'
 
       resp.body = json.dumps(result)
     except ValueError:
