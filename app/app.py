@@ -1,5 +1,5 @@
 #app.py
-import falcon, json, git, os, shutil
+import falcon, json, os, shutil
 
 class ansibleResource:
 
