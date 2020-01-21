@@ -40,9 +40,7 @@ class ansibleResource:
         run_ansible(self.git_url, self.git_dir, ansible_cmd))
 
       resp.status = falcon.HTTP_202
-      resp.body = {
-        'message': 'Ansible run initiated.'
-      }
+      resp.body = 'Ansible run initiated.'
 
     except Exception as ex:
       raise falcon.HTTPError(falcon.HTTP_500,'Server Error', 'Actual error: {}'.format(ex))
