@@ -24,11 +24,12 @@ class ansibleResource:
 
     try:
       result = json.loads(raw_json, encoding='utf-8')
+      print('HTTP request body: {}',.format(json.dumps(result)))
       ansible_cmd = self.command
-      if result.check:
+      if "check" in result:
         print('Webhook asked for check mode, changes will not be applied to inventory.')
         ansible_cmd.append(' --check')
-      print(json.dumps(result))
+
       resp.body = json.dumps(result)
     except ValueError:
       raise falcon.HTTPError(falcon.HTTP_400, 'Invalid JSON', 'Could not decode the request body, must be a valid JSON document.')
