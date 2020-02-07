@@ -1,5 +1,7 @@
 #app.py
-import falcon, json, os, shutil, asyncio
+#from gevent import monkey, pwsgi
+import json, os, shutil
+import falcon
 
 class ansibleResource:
 
