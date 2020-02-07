@@ -2,6 +2,9 @@ FROM pypy:3-stretch
 
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
+ENV WINRM_USER="vagrant"
+ENV WINRM_PASS="password"
+ENV WINRM_CERT_VALIDATE="ignore"
 ENV SSH_USER="ansible"
 ENV GIT_URL="https://github.com/CultClassik/ansible-control.git"
 ENV GIT_DIR="/ansible"
