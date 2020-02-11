@@ -2,14 +2,19 @@ FROM pypy:3-stretch
 
 LABEL "maintainer"="Chris Diehl <cultclassik@gmail.com>"
 
+ENV GIT_DIR="/ansible"
+ENV ANSIBLE_HOST_KEY_CHECKING=False
+ENV WINRM_CERT_VALIDATE="ignore"
+ENV ASNIBLE_LOG_PATH="/tmp/ansible_run.log"
+
 ENV WINRM_USER="vagrant"
 ENV WINRM_PASS="password"
-ENV WINRM_CERT_VALIDATE="ignore"
 ENV SSH_USER="ansible"
+ENV SSH_PASS="We prefer keys"
 ENV GIT_URL="https://github.com/CultClassik/ansible-control.git"
-ENV GIT_DIR="/ansible"
-ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --key-file /key.rsa -i /ansible/inventory.yml"
-ENV ANSIBLE_HOST_KEY_CHECKING=False
+#ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml --key-file /key.rsa -i /ansible/inventory.yml --check"
+ENV ANSIBLE_CMD="ansible-playbook /ansible/main.yml -i /ansible/inventory.yml"
+
 
 USER root
 
