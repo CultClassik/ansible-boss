@@ -26,6 +26,9 @@ class ansibleResource:
 
     try:
       result = json.loads(raw_json, encoding='utf-8')
+      print(result['testkey'])
+      return falcon.HTTP(200)
+
       print('HTTP request body: {}'.format(json.dumps(result)))
       ansible_cmd = self.command
       if "check" in result:

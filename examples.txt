@@ -1,5 +1,7 @@
 docker run --rm \
   --name ansible-boss \
+  -e "WINRM_USER=chris" \
+  -e "WINRM_PASS=congo12" \
   -e "SSH_USER=ansible" \
   -e "GIT_URL=https://github.com/CultClassik/ansible-control.git" \
   -e "ANSIBLE_CMD=ansible-playbook /ansible/main.yml --key-file /key.rsa -i /ansible/inventory.yml --check" \
