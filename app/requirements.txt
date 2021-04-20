@@ -7,5 +7,5 @@ readline==6.2.4.1
 #six==1.14.0
 #gitpython==3.0.5
 # ansible specific packages
-ansible==2.9.4
+ansible==2.9.20
 pywinrm==0.2.2
